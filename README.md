@@ -1,4 +1,4 @@
-# NewsApiSample
+# News API Sample
 
 Repository with an ASP.Net sample based in a News API.
 
@@ -140,7 +140,7 @@ The enpoint **https://localhost:44387/api/stories/beststories/** should showed (
           "commentCount": 318
         },
         {
-          "title": "France's AMF watchdog fines Bloomberg €5M over Vinci hoax",
+          "title": "France's AMF watchdog fines Bloomberg â‚¬5M over Vinci hoax",
           "uri": "https://www.reuters.com/article/us-france-amf-bloomberg/frances-amf-watchdog-fines-bloomberg-5-million-over-vinci-hoax-idUSKBN1YK1VN",
           "postedBy": "ComodoHacker",
           "time": "0001-01-01T00:02:37.6582857",
