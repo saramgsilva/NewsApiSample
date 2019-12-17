@@ -1,6 +1,6 @@
 # News API Sample
 
-Repository with an ASP.Net sample based in a News API.
+Repository with an ASP.Net Core 2.2 sample based in a News API.
 
 ## How run the project
 
