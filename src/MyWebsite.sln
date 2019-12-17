@@ -17,12 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWesite.Business.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{BDB4F64A-1306-4754-BA04-F1E2A412EA90}"
 	ProjectSection(SolutionItems) = preProject
-		ReadMe.md = ReadMe.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.Dtos", "MyWesite.Dtos\MyWebsite.Dtos.csproj", "{E3E64345-46DA-408C-9C69-A65AECA41479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebSite.Api", "MyWebSite.Api\MyWebSite.Api.csproj", "{47961FE5-B21F-41D7-8C3C-4AB6C02B554C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebSite.Api", "MyWebSite.Api\MyWebSite.Api.csproj", "{47961FE5-B21F-41D7-8C3C-4AB6C02B554C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
