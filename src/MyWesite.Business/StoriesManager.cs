@@ -9,15 +9,27 @@ using System.Threading.Tasks;
 
 namespace MyWebsite.Business
 {
+    /// <summary>
+    /// Defines the Stories Manager.
+    /// </summary>
+    /// <seealso cref="MyWebsite.Business.IStoriesManager" />
     public class StoriesManager : IStoriesManager
     {
         private readonly IHttpClientFactory _clientFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StoriesManager"/> class.
+        /// </summary>
+        /// <param name="clientFactory">The client factory.</param>
         public StoriesManager(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
 
+        /// <summary>
+        /// Gets the 20 best stories asynchronous.
+        /// </summary>
+        /// <returns>The best stories dto</returns>
         public async Task<BestStoriesDto> GetBestStoriesAsync()
         {
             var bestStoriesDto = new BestStoriesDto();
@@ -30,7 +42,7 @@ namespace MyWebsite.Business
             var responseBody1 = await response1.Content.ReadAsStringAsync();
             var bestStories = JsonConvert.DeserializeObject<BestStories>(responseBody1);
 
-            // take then
+            // take 20 stories
             var stories = bestStories.Take(20);
 
             // get story details
@@ -41,15 +53,24 @@ namespace MyWebsite.Business
                 storiesDto.Add(storyDto);
             }
 
+            // apply order in a descending way (score)
             storiesDto = storiesDto.OrderByDescending(i => i.Score).ToList();
-            bestStoriesDto.Stories = storiesDto;
+            bestStoriesDto.AddRange(storiesDto);
+
             return bestStoriesDto;
         }
 
+        /// <summary>
+        /// Gets the story details.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="item">The item.</param>
+        /// <returns>The Story Dto</returns>
         private static async Task<StoryDto> GetStoryDetails(HttpClient client, int item)
         {
             // get story by id
             var url = $"{Constants.StoryDetailsUrl}/{item}.json";
+
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
 

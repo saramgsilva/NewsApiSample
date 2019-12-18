@@ -2,8 +2,11 @@
 
 namespace MyWebsite.Dtos
 {
-    public class BestStoriesDto
+    /// <summary>
+    /// Define the best stories dto.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.List{MyWebsite.Dtos.StoryDto}" />
+    public class BestStoriesDto : List<StoryDto>
     {
-        public IList<StoryDto> Stories { get; set; } = new List<StoryDto>();
     }
 }

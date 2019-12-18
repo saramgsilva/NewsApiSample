@@ -9,13 +9,24 @@ using System.Collections.Generic;
 
 namespace MyWebsite.Business
 {
+    /// <summary>
+    /// Defines the News API Manager
+    /// </summary>
+    /// <seealso cref="MyWebsite.Business.INewsApiManager" />
     public class NewsApiManager : INewsApiManager
     {
+        /// <summary>
+        /// Gets the best stories asynchronous.
+        /// </summary>
+        /// <param name="total">The total.</param>
+        /// <returns>The 20 best stories dto.</returns>
         public async Task<BestStoriesDto> GetBestStoriesAsync(int total)
         {
             var bestStoriesDto = new BestStoriesDto();
 
             var storiesDto = new List<StoryDto>();
+
+            // create the webclient object
             using (var client = new HttpClient())
             {
                 // Get ids 
@@ -25,11 +36,9 @@ namespace MyWebsite.Business
                 string responseBody = await response.Content.ReadAsStringAsync();
                 BestStories bestStories = JsonConvert.DeserializeObject<BestStories>(responseBody);
 
-
-                // take then
+                // take stories based on total
                 var stories = bestStories.Take(total);
-
-
+                
                 // get story details
                 foreach (var item in stories)
                 {
@@ -39,11 +48,18 @@ namespace MyWebsite.Business
                 }
             }
 
+            // apply order in a descending way (score)
             storiesDto = storiesDto.OrderByDescending(i => i.Score).ToList();
-            bestStoriesDto.Stories = storiesDto;
+            bestStoriesDto.AddRange(storiesDto);
             return bestStoriesDto;
         }
 
+        /// <summary>
+        /// Gets the story details.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="item">The item.</param>
+        /// <returns>The Story Dto</returns>
         private static async Task<StoryDto> GetStoryDetails(HttpClient client, int item)
         {
             // get story by id
