@@ -15,24 +15,17 @@ namespace MyWesite.Business.Tests
             _newsManager = new NewsApiManager();
         }
 
-        [Test]
-        public async Task Test_BestSoties_CountEquals1()
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(20)]
+        public async Task Test_BestStories(int value)
         {
-            var result = await _newsManager.GetBestStoriesAsync(1);
+            var result = await _newsManager.GetBestStoriesAsync(value);
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Stories);
-            Assert.IsTrue(result.Stories.Count == 1);
-        }
-
-        [Test]
-        public async Task Test_BestSoties_CountEquals20()
-        {
-            var result = await _newsManager.GetBestStoriesAsync(20);
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Stories);
-            Assert.IsTrue(result.Stories.Count == 20);
+            Assert.IsTrue(result.Count == value);
 
-            foreach (var story in result.Stories)
+            foreach (var story in result)
             {
                 Assert.IsTrue(!string.IsNullOrEmpty(story.PostedBy));
                 Assert.IsTrue(story.Score >= 0);
